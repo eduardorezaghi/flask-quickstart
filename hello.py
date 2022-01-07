@@ -7,7 +7,7 @@ from flask import request
 from flask import render_template
 
 # Iniciando uma aplicação FLASK
-# --> >> $env:FLASK_APP = "hello_flask"
+# --> >> $env:FLASK_APP = "hello"
 # --> >> $env:FLASK_ENV = "development"
 # --> >> flask run
 app = Flask(__name__)
@@ -60,6 +60,16 @@ def show_post(post_id):
 def hello(name=None):
     return render_template('hello.html', name=name)
 
+
+# Realização de testes com o método test_request_context()
+# ---------------
+# "with" encapsula a execução da requisição para realização
+# de testes "assert"
+with app.test_request_context('/hello', method='POST'):
+    # agora você pode fazer algo com a requisição até o
+    # fim do bloco with, como testes assert básicos:
+    assert request.path == '/hello'
+    assert request.method == 'POST'
 
 # Executa a aplicação em modo DEBUG.
 # ---------------
