@@ -1,0 +1,13 @@
+#hello_world {
+    color: red;
+    text-shadow: 2px 3px black;
+    text-align: center;
+}
+
+#name {
+    color: lightblue;
+    font: sans-serif;
+    font-style: italic;
+    text-shadow: 2px 3px black;
+    text-align: left;
+}

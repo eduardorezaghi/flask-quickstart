@@ -3,8 +3,11 @@ from markupsafe import escape
 # Biblioteca request implementada pelo Flask
 from flask import request
 
+# Método usado para renderizar templates HTML
+from flask import render_template
+
 # Iniciando uma aplicação FLASK
-# --> >> $env:FLASK_APP = "hello"
+# --> >> $env:FLASK_APP = "hello_flask"
 # --> >> $env:FLASK_ENV = "development"
 # --> >> flask run
 app = Flask(__name__)
@@ -20,7 +23,7 @@ def hello_world():
 # Rota básica com variável
 # ---------------
 @app.route("/<name>")
-def hello(name):
+def root_name(name):
     return f"Hello, {name}!"
 
 
@@ -40,14 +43,22 @@ def show_post(post_id):
     return f'Post {post_id}'
 
 # Rota implementando variável methods e tratamento conforme tipo da requisição
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    # SE O MÉTODO DA REQUISIÇÃO FOR POST
-    # if request.method == 'POST':
-        # return do_the_login()
-    # else:
-        # return show_the_login_form()
+# ---------------
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     SE O MÉTODO DA REQUISIÇÃO FOR POST
+#     if request.method == 'POST':
+#         return do_the_login()
+#     else:
+#         return show_the_login_form()
 
+
+# Rota com renderização de template HTML
+# ---------------
+@app.route('/hello/')
+@app.route('/hello/<name>')
+def hello(name=None):
+    return render_template('hello.html', name=name)
 
 
 # Executa a aplicação em modo DEBUG.
