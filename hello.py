@@ -1,5 +1,7 @@
 from flask import Flask
 from markupsafe import escape
+# Biblioteca request implementada pelo Flask
+from flask import request
 
 # Iniciando uma aplicação FLASK
 # --> >> $env:FLASK_APP = "hello"
@@ -30,12 +32,22 @@ def show_user_profile(username):
     return f'User {escape(username)}'
 
 
-# Rota com variável e tipo esperado (int)]
+# Rota com variável e tipo esperado (int)
 # ---------------
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
     # exibe um post com id específica, do tipo int
     return f'Post {post_id}'
+
+# Rota implementando variável methods e tratamento conforme tipo da requisição
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    # SE O MÉTODO DA REQUISIÇÃO FOR POST
+    # if request.method == 'POST':
+        # return do_the_login()
+    # else:
+        # return show_the_login_form()
+
 
 
 # Executa a aplicação em modo DEBUG.
